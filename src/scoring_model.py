@@ -6,6 +6,11 @@ import pandas as pd
 import numpy as np
 import os
 import re
+import sys
+
+# 导入 AHP 权重模块（与本文件同目录，兼容从项目根目录运行）
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from ahp_weights import get_ahp_weights, get_cr_report
 
 # 数据路径
 DATA_DIR = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'data')
@@ -200,21 +205,12 @@ def main():
     # 4. 加权评分（AHP层次分析法确定权重）
     print("\n⚖️ 正在进行加权评分...")
     
-    weights = {
-        '规模得分': 0.12,      # 企业规模
-        '增长得分': 0.15,      # 增长能力
-        '盈利得分': 0.12,      # 盈利能力
-        '财务健康得分': 0.08,  # 财务健康度
-        '技术投入得分': 0.08,  # 技术投入
-        '成熟度得分': 0.05,    # 企业成熟度
-        '上市年限得分': 0.05,  # 上市年限
-        '地域得分': 0.08,      # 地域匹配
-        '行业景气得分': 0.10,  # 行业景气度
-        '企业性质得分': 0.03,  # 企业性质
-        '决策链得分': 0.07,    # 决策链复杂度
-        '需求匹配得分': 0.07,  # 需求匹配度
-    }
-    
+        # 权重由 AHP 层次分析法确定（判断矩阵→特征向量→一致性检验→层次总排序）
+    weights = get_ahp_weights()
+    print("AHP 一致性检验：")
+    print(get_cr_report())
+    print("AHP 12维权重：", {k: round(v, 4) for k, v in weights.items()})
+
     # 计算总分
     df['总分'] = 0
     for col, weight in weights.items():
