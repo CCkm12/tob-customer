@@ -5,3 +5,10 @@ __pycache__/
 .vscode/
 .DS_Store
 Thumbs.db
+
+# 日志与临时文件
+logs/
+screenshot_tmp.png
+
+# 尽调报告（含客户敏感信息，如仓库是公开的建议不推；私有仓库可删掉这行）
+research_reports/

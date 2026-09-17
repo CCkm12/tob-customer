@@ -24,7 +24,7 @@ TOP 高价值客户（A/B/C/D 四级分级）
 - **多源数据采集**：requests + BeautifulSoup 多线程爬虫，覆盖巨潮资讯网（证监会指定披露平台）、同花顺F10、腾讯财经，990家公司、市值数据覆盖率99.7%
 - **12维度评分模型**：AHP层次分析法确定权重，从规模/增长/盈利/财务健康/行业景气等12个维度打分，A/B/C/D四级分级
 - **需求信号识别**：从财务和业务数据中识别扩张型/降本型/转型型/合规型/技术升级型/建设型6类需求，量化需求强度
-- **可视化分析看板**：Streamlit + Plotly，数据总览、行业深度对比、评分可解释性（维度贡献度/vs行业平均）、交互式筛选
+- **导入自动评级**：看板支持 CSV/Excel 上传公司名单，复用 12 维度 AHP 模型即时打分分级，并可追加到客户库
 - **AI快速情报**：基于结构化数据10秒生成销售情报
 - **AI联网深度尽调**：自动生成搜索query、Tavily实时联网检索、大模型综合成带信息来源的深度尽调报告（模拟销售代表Agent的思考链）
 
@@ -46,7 +46,7 @@ customer_scoring/
 │   ├── data_collector.py        # 公司基本信息爬虫（巨潮+同花顺）
 │   ├── financial_collector.py   # 财务数据爬虫
 │   ├── extra_data_collector.py  # 市值数据采集（腾讯财经）
-│   ├── scoring_model.py         # 12维度AHP评分模型
+│   ├── scoring_model.py         # 12维度AHP评分模型（支持导入数据评分）
 │   ├── demand_analyzer.py       # 需求信号识别
 │   └── company_researcher.py    # AI联网深度尽调（Tavily+DeepSeek）
 ├── data/                        # 原始/中间数据
